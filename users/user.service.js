@@ -89,8 +89,8 @@ async function forgotPassword(username, params) {
     return omitHash(user.get());
 }
 
-async function _delete(id) {
-    const user = await getUser(id);
+async function _delete(username) {
+    const user = await getUser(username);
     await user.destroy();
 }
 

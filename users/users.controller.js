@@ -9,12 +9,14 @@ const userService = require('./user.service');
 router.post('/authenticate', authenticateSchema, authenticate);
 router.post('/register', registerSchema, register);
 router.post('/consultation', uploadForm, consultation);
-router.get('/', authorize(), getAll);
+//router.get('/', authorize(), getAll);
+router.get('/', getAll);
 router.get('/current', authorize(), getCurrent);
 router.get('/:id', authorize(), getById);
 router.put('/:id', authorize(), updateSchema, update);
 router.put('/password/:username', updatePassword, forgotPassword);
-router.delete('/:id', authorize(), _delete);
+//router.delete('/:id', authorize(), _delete);
+router.delete('/:username', _delete);
 
 module.exports = router;
 
@@ -64,11 +66,19 @@ function uploadForm(req, res, next) {
     validateRequest(req, next, schema);
 }
 
+// function register(req, res, next) {
+//     userService.create(req.body)
+//         .then(() => res.json({ message: 'Registration successful' }))
+//         .catch(next);
+// }
 function consultation(req, res, next) {
     userService.create(req.body)
         .then(() => res.json({ message: 'Registration successful' }))
         .catch(next);
 }
+
+
+
 
 // function updateUsername(req, res, next) {
 //     id = req.body.id
@@ -78,7 +88,7 @@ function consultation(req, res, next) {
 //         .catch(next);
 // }
 
-function getAll(req, res, next) {
+function getAll(req, res, next){
     userService.getAll()
         .then(users => res.json(users))
         .catch(next);
@@ -127,7 +137,7 @@ function update(req, res, next) {
 }
 
 function _delete(req, res, next) {
-    userService.delete(req.params.id)
+    userService.delete(req.params.username)
         .then(() => res.json({ message: 'User deleted successfully' }))
         .catch(next);
 }
