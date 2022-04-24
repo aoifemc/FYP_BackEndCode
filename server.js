@@ -4,13 +4,16 @@ const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const errorHandler = require('Authorisation/error-handler');
+const users = require('./users/users.controller');
+//const forms = require('./forms/forms.controller');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
 // api routes
-app.use('/users', require('./users/users.controller'));
+ app.use('/users', users);
+ //app.use('/forms', forms);
 
 // global error handler
 app.use(errorHandler);

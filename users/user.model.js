@@ -7,8 +7,7 @@ function model(sequelize) {
         firstName: { type: DataTypes.STRING, allowNull: false },
         lastName: { type: DataTypes.STRING, allowNull: false },
         username: { type: DataTypes.STRING, allowNull: false },
-        hash: { type: DataTypes.STRING, allowNull: false },
-        //admin: {type: DataTypes.BOOLEAN, allowNull: false}
+        hash: { type: DataTypes.STRING, allowNull: false }
     };
 
     const options = {
@@ -24,3 +23,4 @@ function model(sequelize) {
 
     return sequelize.define('User', attributes, options);
 }
+

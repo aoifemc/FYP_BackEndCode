@@ -8,7 +8,7 @@ const userService = require('./user.service');
 // routes
 router.post('/authenticate', authenticateSchema, authenticate);
 router.post('/register', registerSchema, register);
-router.post('/consultation', uploadForm, consultation);
+//router.post('/consultationForm', uploadForm, consultation);
 //router.get('/', authorize(), getAll);
 router.get('/', getAll);
 router.get('/current', authorize(), getCurrent);
@@ -17,6 +17,7 @@ router.put('/:id', authorize(), updateSchema, update);
 router.put('/password/:username', updatePassword, forgotPassword);
 //router.delete('/:id', authorize(), _delete);
 router.delete('/:username', _delete);
+
 
 module.exports = router;
 
@@ -53,32 +54,13 @@ function register(req, res, next) {
         .catch(next);
 }
 
-function uploadForm(req, res, next) {
-    const schema = Joi.object({
-        Name: Joi.string().required(),
-        User: Joi.string().required(),
-        Feelings: Joi.string().required(),
-        Year: Joi.string().required(),
-        //confirm: Joi.string().min(6).required()
-        //admin: Joi.boolean().required()
 
-    });
-    validateRequest(req, next, schema);
-}
 
-// function register(req, res, next) {
-//     userService.create(req.body)
-//         .then(() => res.json({ message: 'Registration successful' }))
-//         .catch(next);
-// }
-function consultation(req, res, next) {
+function register(req, res, next) {
     userService.create(req.body)
         .then(() => res.json({ message: 'Registration successful' }))
         .catch(next);
 }
-
-
-
 
 // function updateUsername(req, res, next) {
 //     id = req.body.id
@@ -141,3 +123,24 @@ function _delete(req, res, next) {
         .then(() => res.json({ message: 'User deleted successfully' }))
         .catch(next);
 }
+
+// function uploadForm(req, res, next) {
+//     const schema = Joi.object({
+//         id: Joi.number().required(),
+//         Name: Joi.string().required(),
+//         User: Joi.string().required(),
+//         Feelings: Joi.string().required(),
+//         Year: Joi.string().required(),
+//         //confirm: Joi.string().min(6).required()
+//         //admin: Joi.boolean().required()
+
+//     });
+//     validateRequest(req, next, schema);
+// }
+
+// function consultation(req, res, next) {
+//     formService.newForm(req.body)
+//         .then(() => res.json({ message: 'Form Saved' }))
+//         .catch(next);
+// }
+
